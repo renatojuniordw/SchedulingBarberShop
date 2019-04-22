@@ -1,0 +1,18 @@
+<ion-item>
+  <ion-label position="floating">E-mail</ion-label>
+  <ion-input type="email"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label floating>Senha</ion-label>
+  <ion-input [type]="isSenha ? 'text' : 'password'" name="senha"
+    required></ion-input>
+  <button (click)="togglePasswordFieldType()" color="medium" type="button">
+    <ion-icon [name]="isSenha ? 'eye-off' : 'eye'"></ion-icon>
+  </button>
+</ion-item>
+
+<br>
+<ion-row>
+  <ion-button color="primary" class="button button-full" (click)="onClick()">CONECTAR</ion-button>
+</ion-row>

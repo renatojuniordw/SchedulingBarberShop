@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: 'AIzaSyAVphcZ1smkEogmMMJg4AbEShWAjapAj4A',
+    authDomain: 'barbershopscheduling.firebaseapp.com',
+    databaseURL: 'https://barbershopscheduling.firebaseio.com',
+    projectId: 'barbershopscheduling',
+    storageBucket: 'barbershopscheduling.appspot.com',
+    messagingSenderId: '1048191154961'
+  }
 };
 
 /*

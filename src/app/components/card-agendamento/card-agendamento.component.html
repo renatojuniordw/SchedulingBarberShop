@@ -1,0 +1,31 @@
+<section *ngFor="let item of agendamentos">
+  <ion-card>
+    <ion-card-header>
+      <ion-item>
+        <ion-card-title>
+          <ion-icon name="cut"></ion-icon>
+          {{item.servico}}
+        </ion-card-title>
+      </ion-item>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-chip>
+        <ion-icon name="calendar" color="primary"></ion-icon>
+        <ion-label>{{item.data}}</ion-label>
+      </ion-chip>
+      <ion-chip>
+        <ion-icon name="time" color="primary"></ion-icon>
+        <ion-label>{{item.horario}}</ion-label>
+      </ion-chip>
+      <br>
+      <ion-chip>
+        <ion-icon name="person" color="primary"></ion-icon>
+        <ion-label>{{item.barbeiro}}</ion-label>
+      </ion-chip>
+      <br>
+      <ion-button type="button" (click)="presentAlert()" id="{{item.id}}"
+        color="danger">Cancelar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</section>

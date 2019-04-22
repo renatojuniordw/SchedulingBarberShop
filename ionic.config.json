@@ -1,6 +1,8 @@
 {
   "name": "Scheduling",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "0e5806ff"
 }
