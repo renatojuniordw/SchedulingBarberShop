@@ -7,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormAgendamentoComponent implements OnInit {
 
+  anoMin = new Date().getFullYear();
   constructor() { }
 
   ngOnInit() {}
+
+  onClick(){
+    console.log('Agendou');
+  }
 
 }

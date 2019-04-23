@@ -5,27 +5,25 @@
     src="https://i1.wp.com/wp-blog-dir.s3.amazonaws.com/uploads/sites/24/2017/10/barber-logo.png?resize=320%2C320&ssl=1">
   </ion-img>
 
-  <app-form-login></app-form-login>
-
-  <ion-row class="labels">
-    ou conecte-se usando:
-  </ion-row>
-
   <ion-grid>
     <ion-row>
-      <ion-col>
-        <ion-button expand="full" fill="outline" color="primary">
-          <ion-icon name="logo-facebook"></ion-icon>
-          Facebook
-        </ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button expand="full" fill="outline" color="primary">
-          <ion-icon name="logo-google"></ion-icon>
-          Google
-        </ion-button>
-      </ion-col>
+      <ion-button expand="full" class="button" color="danger">
+        <ion-icon name="logo-google" class="icon"></ion-icon>
+        Google
+      </ion-button>
+    </ion-row>
+    <ion-row>
+      <ion-button expand="full" class="button" color="primary">
+        <ion-icon name="logo-facebook" class="icon"></ion-icon>
+        Facebook
+      </ion-button>
     </ion-row>
   </ion-grid>
+
+  <ion-row class="labels">
+    <hr> ou <hr>
+  </ion-row>
+
+  <app-form-login></app-form-login>
 
 </ion-content>

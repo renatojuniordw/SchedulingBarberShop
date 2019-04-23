@@ -3,7 +3,6 @@
     <ion-card-header>
       <ion-item>
         <ion-card-title>
-          <ion-icon name="cut"></ion-icon>
           {{item.servico}}
         </ion-card-title>
       </ion-item>
@@ -22,10 +21,12 @@
       <ion-chip>
         <ion-icon name="person" color="primary"></ion-icon>
         <ion-label>{{item.barbeiro}}</ion-label>
+        <ion-icon name="cut"></ion-icon>
       </ion-chip>
       <br>
-      <ion-button type="button" (click)="presentAlert()" id="{{item.id}}"
-        color="danger">Cancelar</ion-button>
+      <ion-button type="button" (click)="presentActionSheet()" id="{{item.id}}" color="primary">
+        configuração
+      </ion-button>
     </ion-card-content>
   </ion-card>
 </section>

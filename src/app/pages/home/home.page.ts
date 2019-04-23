@@ -9,7 +9,6 @@ import { Agendamento } from './../../services/agendamento.service';
 })
 export class HomePage implements OnInit {
 
-  // _agendamentos = Agendamento;
   agendamentos = [];
   totalAgentamento = 1;
 
