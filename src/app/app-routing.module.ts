@@ -4,6 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
   { path: 'agendamento', loadChildren: './pages/agendamento/agendamento.module#AgendamentoPageModule' },
+  { path: 'agendamento/:id', loadChildren: './pages/agendamento/agendamento.module#AgendamentoPageModule' },
   { path: 'cadastrar', loadChildren: './pages/cadastrar/cadastrar.module#CadastrarPageModule' },
   { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },

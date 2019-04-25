@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from 'angularfire2/firestore';
 import { Time } from '@angular/common';
 import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
-export interface Agendamento {
-  servico: string,
+
+export interface iAgendamento {
+  id: string,
   data: Date,
   horario: Time,
-  barbeiro: string
+  servico: string,
+  barbeiro: string,
+  status: string
 }
 
 @Injectable({
@@ -16,40 +20,49 @@ export interface Agendamento {
 
 export class AgendamentoService {
 
-  private agendamentoCollection: AngularFirestoreCollection<Agendamento>;
-  private agendamentos: Observable<Agendamento[]>;
+  private oAgendamentos: Observable<iAgendamento[]>;
+  private agendamentoCollection: AngularFirestoreCollection<iAgendamento>;
 
-  constructor(db: AngularFirestore) {
-    this.agendamentoCollection = db.collection<Agendamento>('agendamentos');
-
-    // this.agendamentos = this.agendamentoCollection.snapshotChanges().pipe(
-    //   map(actions => {
-    //     return actions.map(a => {
-    //       const data = a.payload.doc.data();
-    //       const id = a.payload.doc.id;
-    //       return { id, ...data }
-    //     })
-    //   })
-    // )
+  constructor(private db: AngularFirestore) {
+    this.agendamentoCollection = db.collection<iAgendamento>('agendamentos');
+    this.oAgendamentos = this.agendamentoCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
   }
 
-  getAgendamentos() {
-    return this.agendamentos;
+  getAgendamentos(): Observable<iAgendamento[]> {
+    // console.log("AgendamentoService " + this.oAgendamentos)
+    // this.oAgendamentos.forEach(item=>{
+    //   console.log(item)
+    // })
+    return this.oAgendamentos;
   }
 
-  getAgendamento(id) {
-    return this.agendamentoCollection.doc<Agendamento>(id).valueChanges();
+  getAgendamentoPorId(id: string): Observable<iAgendamento> {
+    return this.agendamentoCollection.doc<iAgendamento>(id).valueChanges().pipe(
+      take(1),
+      map(item => {
+        item.id = id;
+        return item
+      })
+    )
   }
 
-  updateAgendamento(item: Agendamento, id: string) {
-    return this.agendamentoCollection.doc(id).update(item)
-  }
-
-  addAgendamento(item: Agendamento) {
+  novoAgendamento(item: iAgendamento): Promise<DocumentReference> {
     return this.agendamentoCollection.add(item);
   }
 
-  removeAgendamento(id) {
+  atualizarAgendamento(item: iAgendamento, itemUp: any): Promise<void> {
+    return this.agendamentoCollection.doc(item.id).update(itemUp);
+  }
+
+  deletarAgendamento(id: string): Promise<void> {
     return this.agendamentoCollection.doc(id).delete();
   }
 
