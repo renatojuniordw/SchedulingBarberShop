@@ -37,12 +37,12 @@ export class FormAgendamentoComponent implements OnInit {
 
   onClick() {
     this.serviceAgendamento.novoAgendamento(this.formAgendamento.value).then((item) => {
-      this.presentAlert();
+      this.alert();
       this.formAgendamento.reset();
     });
   }
 
-  async presentAlert() {
+  async alert() {
     const alert = await this.alertController.create({
       header: 'Salvo com sucesso!',
       message: 'Seu agendamento foi realizado com sucesso.',

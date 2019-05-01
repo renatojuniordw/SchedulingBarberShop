@@ -13,12 +13,12 @@
         <ion-badge color="success">{{totalAgentamento}}</ion-badge>
     </ion-item>
 
-    <ion-content>
+    <ion-content padding>
         <app-card-agendamento [agendamentos]="agendamentos"></app-card-agendamento>
-        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadAgendamentos($event)">
             <ion-infinite-scroll-content
                 loadingSpinner="bubbles"
-                loadingText="Loading more data...">
+                loadingText="Carregando Agendamentos">
             </ion-infinite-scroll-content>
         </ion-infinite-scroll>
     </ion-content>

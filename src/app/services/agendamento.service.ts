@@ -66,10 +66,15 @@ export class AgendamentoService implements OnInit {
     return this.agendamentoCollection.add(item);
   }
 
-  atualizarAgendamento(item: iAgendamento, itemUp: any): Promise<void> {
+  atualizarAgendamento(id: string, itemUp: any): Promise<void> {
     this.conexaoFirebase();
-    return this.agendamentoCollection.doc(item.id).update(itemUp);
+    return this.agendamentoCollection.doc(id).update(itemUp);
   }
+
+  // atualizarAgendamento(item: iAgendamento, itemUp: any): Promise<void> {
+  //   this.conexaoFirebase();
+  //   return this.agendamentoCollection.doc(item.id).update(itemUp);
+  // }
 
   deletarAgendamento(id: string): Promise<void> {
     this.conexaoFirebase();

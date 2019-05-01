@@ -50,7 +50,6 @@ export class CardAgendamentoComponent implements OnInit {
           text: 'Não',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           }
         }
       ]
@@ -72,16 +71,13 @@ export class CardAgendamentoComponent implements OnInit {
         text: 'Editar Agendamento',
         icon: 'create',
         handler: () => {
-          this.openModal(idAgendamento)
-          console.log('Share clicked');
+          this.openModal(idAgendamento);
         }
       }, {
         text: 'Fechar',
         icon: 'close',
         role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
+        handler: () => { }
       }]
     });
     await actionSheet.present();

@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuPage implements OnInit {
 
+  private nomeUsuario = 'Renato Junior';
+  private emailUsuario = 'renato-bgs@live.com';
+
   pages = [
     {
       title: 'Home',
