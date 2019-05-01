@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference } from 'angularfire2/firestore';
 import { Time } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -18,13 +18,22 @@ export interface iAgendamento {
   providedIn: 'root'
 })
 
-export class AgendamentoService {
+export class AgendamentoService implements OnInit {
 
   private oAgendamentos: Observable<iAgendamento[]>;
   private agendamentoCollection: AngularFirestoreCollection<iAgendamento>;
 
   constructor(private db: AngularFirestore) {
-    this.agendamentoCollection = db.collection<iAgendamento>('agendamentos');
+    this.conexaoFirebase();
+  }
+
+  ngOnInit() {
+    this.conexaoFirebase();
+  }
+
+
+  conexaoFirebase() {
+    this.agendamentoCollection = this.db.collection<iAgendamento>('agendamentos');
     this.oAgendamentos = this.agendamentoCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -37,14 +46,12 @@ export class AgendamentoService {
   }
 
   getAgendamentos(): Observable<iAgendamento[]> {
-    // console.log("AgendamentoService " + this.oAgendamentos)
-    // this.oAgendamentos.forEach(item=>{
-    //   console.log(item)
-    // })
+    this.conexaoFirebase();
     return this.oAgendamentos;
   }
 
   getAgendamentoPorId(id: string): Observable<iAgendamento> {
+    this.conexaoFirebase();
     return this.agendamentoCollection.doc<iAgendamento>(id).valueChanges().pipe(
       take(1),
       map(item => {
@@ -55,14 +62,17 @@ export class AgendamentoService {
   }
 
   novoAgendamento(item: iAgendamento): Promise<DocumentReference> {
+    this.conexaoFirebase();
     return this.agendamentoCollection.add(item);
   }
 
   atualizarAgendamento(item: iAgendamento, itemUp: any): Promise<void> {
+    this.conexaoFirebase();
     return this.agendamentoCollection.doc(item.id).update(itemUp);
   }
 
   deletarAgendamento(id: string): Promise<void> {
+    this.conexaoFirebase();
     return this.agendamentoCollection.doc(id).delete();
   }
 

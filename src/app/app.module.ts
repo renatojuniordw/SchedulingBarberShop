@@ -23,8 +23,8 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/fi
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     ModalPageModule

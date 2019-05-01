@@ -14,7 +14,9 @@ export class HomePage implements OnInit {
 
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
-  constructor(private navCtrl: NavController, private agendamentoService: AgendamentoService) { }
+  constructor(private navCtrl: NavController, private agendamentoService: AgendamentoService) {
+    agendamentoService.conexaoFirebase();
+  }
 
   scrollInfinito(event) {
     setTimeout(() => {
@@ -40,6 +42,7 @@ export class HomePage implements OnInit {
   loadAgendamentos() {
     this.agendamentoService.getAgendamentos().subscribe(
       (item) => {
+        this.totalAgentamento = 0;
         this.agendamentos = item;
         this.totalAgentamento += this.agendamentos.length;
       });

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AlertController, ActionSheetController, ModalController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { ModalPage } from 'src/app/pages/modal/modal.page';
+import { AgendamentoService } from 'src/app/services/agendamento.service';
 
 @Component({
   selector: 'app-card-agendamento',
@@ -13,7 +14,8 @@ export class CardAgendamentoComponent implements OnInit {
   constructor(public alertController: AlertController,
     public actionSheetController: ActionSheetController,
     public toastController: ToastController,
-    private modalController: ModalController) { }
+    private modalController: ModalController,
+    private serviceAgendamento: AgendamentoService) { }
 
   @Input() agendamentos: string;
 
@@ -27,17 +29,22 @@ export class CardAgendamentoComponent implements OnInit {
     toast.present();
   }
 
-  async presentAlert() {
+  excluirAgendamento(id: string) {
+    this.serviceAgendamento.deletarAgendamento(id).then(() => {
+      this.presentToast();
+    })
+  }
+
+  async presentAlert(id: string) {
     const alert = await this.alertController.create({
       header: 'Cancelar Agendamento',
-      // subHeader: '',
       message: 'Deseja cancelar o agendamento?',
       buttons: [
         {
           text: 'Sim',
           handler: () => {
-            this.presentToast()
-            console.log('Favorite clicked');
+            this.excluirAgendamento(id);
+
           }
         }, {
           text: 'Não',
@@ -51,22 +58,21 @@ export class CardAgendamentoComponent implements OnInit {
     await alert.present();
   }
 
-  async presentActionSheet() {
+  async presentActionSheet(idAgendamento: string) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Agendamento',
       buttons: [{
-        text: 'Cancelar',
+        text: 'Cancelar Agendamento',
         role: 'destructive',
         icon: 'close-circle',
         handler: () => {
-          this.presentAlert();
-          console.log('Delete clicked');
+          this.presentAlert(idAgendamento);
         }
       }, {
-        text: 'Editar',
+        text: 'Editar Agendamento',
         icon: 'create',
         handler: () => {
-          this.openModal()
+          this.openModal(idAgendamento)
           console.log('Share clicked');
         }
       }, {
@@ -81,10 +87,10 @@ export class CardAgendamentoComponent implements OnInit {
     await actionSheet.present();
   }
 
-  async openModal() {
+  async openModal(idAgendamento: String) {
     const modal = await this.modalController.create({
       component: ModalPage,
-      componentProps: { value: 123 }
+      componentProps: { value: idAgendamento }
     });
 
     return await modal.present();
