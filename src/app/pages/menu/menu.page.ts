@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuPage implements OnInit {
 
-  private nomeUsuario = 'Renato Junior';
-  private emailUsuario = 'renato-bgs@live.com';
+  private nomeUsuario = '';
+  private emailUsuario = '';
 
   pages = [
     {
@@ -21,17 +22,15 @@ export class MenuPage implements OnInit {
       url: '/menu/agendamento',
       icon: 'calendar'
     }
-    // ,
-    // {
-    //   title: 'Sair',
-    //   url: '/login',
-    //   icon: 'power'
-    // },
   ]
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    console.log(this.authService.userDetails().email)
+    console.log(this.authService.userDetails().displayName)
+    this.nomeUsuario = this.authService.userDetails().displayName;
+    this.emailUsuario = this.authService.userDetails().email;
   }
 
 }

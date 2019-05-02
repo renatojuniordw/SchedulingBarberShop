@@ -16,6 +16,12 @@ import { ModalPageModule } from './pages/modal/modal.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AuthService } from './services/auth.service';
+
+import * as firebase from 'firebase';
+firebase.initializeApp(environment.firebase);
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,7 +33,8 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/fi
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    ModalPageModule
+    ModalPageModule,
+    AngularFireAuthModule
   ],
   providers: [
     StatusBar,
@@ -37,7 +44,8 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/fi
       useClass: IonicRouteStrategy
     },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: FirestoreSettingsToken, useValue: {} }
+    { provide: FirestoreSettingsToken, useValue: {} },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

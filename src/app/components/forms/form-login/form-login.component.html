@@ -1,18 +1,42 @@
-<ion-item>
-  <ion-label position="floating">E-mail</ion-label>
-  <ion-input type="email"></ion-input>
-</ion-item>
+<form (ngSubmit)="onClick()" [formGroup]="formLogin">
 
-<ion-item>
-  <ion-label floating>Senha</ion-label>
-  <ion-input [type]="isSenha ? 'text' : 'password'" name="senha"
-    required></ion-input>
-  <button (click)="togglePasswordFieldType()" color="medium" type="button">
-    <ion-icon [name]="isSenha ? 'eye-off' : 'eye'" size="small"></ion-icon>
-  </button>
-</ion-item>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">E-mail</ion-label>
+        <ion-input type="email" required formControlName="email"></ion-input>
+      </ion-item>
 
-<br>
-<ion-row>
-  <ion-button color="primary" class="button button-full" (click)="onClick()">ENTRAR</ion-button>
-</ion-row>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div class="error-message"
+            *ngIf="formLogin.get('email').hasError(validation.type) &&
+            (formLogin.get('email').dirty ||
+            formLogin.get('email').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+  
+      <ion-item>
+        <ion-label floating>Senha</ion-label>
+        <ion-input [type]="isSenha ? 'text' : 'password'" required
+          formControlName="senha"></ion-input>
+        <button (click)="togglePasswordFieldType()" color="medium" type="button">
+          <ion-icon [name]="isSenha ? 'eye-off' : 'eye'"></ion-icon>
+        </button>
+      </ion-item>
+  
+      <br>
+      <ion-row>
+        <ion-button color="primary" class="button button-full" type="Submit"
+          [disabled]="!formLogin.valid"
+          block>
+          ENTRAR
+        </ion-button>
+        <label class="error-message">{{errorMessage}}</label>
+        <label class="success-message">{{successMessage}}</label>
+      </ion-row>
+  
+    </ion-list>
+  
+  </form>
