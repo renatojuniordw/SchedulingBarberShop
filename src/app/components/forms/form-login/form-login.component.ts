@@ -51,8 +51,8 @@ export class FormLoginComponent implements OnInit {
       .then(res => {
         console.log(res);
         this.errorMessage = "";
-        // this.navCtrl.navigateRoot('/menu/home');
-        this.navCtrl.navigateForward('/menu/home');
+        this.navCtrl.navigateRoot('/menu/home');
+        // this.navCtrl.navigateForward('/menu/home');
       }, err => {
         this.errorMessage = err.message;
       })

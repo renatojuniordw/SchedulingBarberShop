@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form-cadastro',
@@ -29,6 +29,7 @@ export class FormCadastroComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private navCtrl: NavController,
+    public toastController: ToastController,
     private authService: AuthService) {
     this.formCad = this.formBuilder.group({
       email: ['', Validators.compose([
@@ -43,6 +44,14 @@ export class FormCadastroComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  async presentToast(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
 
   tryRegister(value) {
     this.authService.registerUser(value)

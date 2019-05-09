@@ -43,8 +43,14 @@ firebase.initializeApp(environment.firebase);
       provide: RouteReuseStrategy,
       useClass: IonicRouteStrategy
     },
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: FirestoreSettingsToken, useValue: {} },
+    {
+      provide: RouteReuseStrategy,
+      useClass: IonicRouteStrategy
+    },
+    {
+      provide: FirestoreSettingsToken,
+      useValue: {}
+    },
     AuthService
   ],
   bootstrap: [AppComponent]

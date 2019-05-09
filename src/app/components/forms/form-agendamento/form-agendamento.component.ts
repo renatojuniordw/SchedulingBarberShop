@@ -49,7 +49,8 @@ export class FormAgendamentoComponent implements OnInit {
       buttons: [{
         text: 'OK',
         handler: () => {
-          this.navCtrl.navigateRoot('/menu/home');
+          // this.navCtrl.navigateRoot('/menu/home');
+          this.navCtrl.navigateForward('/menu/home');
         }
       }]
     });

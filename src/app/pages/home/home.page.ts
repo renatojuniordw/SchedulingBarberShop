@@ -32,7 +32,8 @@ export class HomePage implements OnInit {
   }
 
   onClickAgendamento() {
-    this.navCtrl.navigateRoot('/menu/agendamento');
+    this.navCtrl.navigateForward('/menu/agendamento');
+    // this.navCtrl.navigateRoot('/menu/agendamento');
   }
 
   ngOnInit() {

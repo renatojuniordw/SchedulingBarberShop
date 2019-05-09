@@ -23,7 +23,7 @@ export class CardAgendamentoComponent implements OnInit {
 
   async presentToast() {
     const toast = await this.toastController.create({
-      message: 'Agendameto excluido com sucesso.',
+      message: 'Agendameto cancelado com sucesso.',
       duration: 2000
     });
     toast.present();
