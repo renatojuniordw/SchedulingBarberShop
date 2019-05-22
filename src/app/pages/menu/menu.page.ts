@@ -21,16 +21,23 @@ export class MenuPage implements OnInit {
       title: 'Agendar',
       url: '/menu/agendamento',
       icon: 'calendar'
+    },
+    {
+      title: 'Configuração',
+      url: '/menu/configuracao',
+      icon: 'cog'
     }
   ]
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    console.log(this.authService.userDetails().email)
-    console.log(this.authService.userDetails().displayName)
     this.nomeUsuario = this.authService.userDetails().displayName;
     this.emailUsuario = this.authService.userDetails().email;
+  }
+
+  onClickExit() {
+    this.authService.logoutUser();
   }
 
 }

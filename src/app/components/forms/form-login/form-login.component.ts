@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -27,6 +27,7 @@ export class FormLoginComponent implements OnInit {
 
   constructor(public navCtrl: NavController,
     private authService: AuthService,
+    public toastController: ToastController,
     private formBuilder: FormBuilder) {
     this.formLogin = this.formBuilder.group({
       email: ['', Validators.compose([
@@ -49,17 +50,38 @@ export class FormLoginComponent implements OnInit {
   loginUser(value) {
     this.authService.loginUser(value)
       .then(res => {
-        console.log(res);
-        this.errorMessage = "";
+        this.errorMessage = '';
         this.navCtrl.navigateRoot('/menu/home');
-        // this.navCtrl.navigateForward('/menu/home');
       }, err => {
-        this.errorMessage = err.message;
+        this.msgErroAlert(err.code);
       })
+  }
+
+
+  msgErroAlert(errorCode: string) {
+    switch (errorCode) {
+      case 'auth/invalid-email':
+        this.presentToast('E-mail não cadastrado.');
+        break;
+      case 'auth/user-not-found':
+        this.presentToast('Não há registro de usuário correspondente a esse e-mail.');
+        break;
+      case 'auth/wrong-password':
+        this.presentToast('Usuário ou senha inválida.');
+        break;
+    }
   }
 
   togglePasswordFieldType() {
     this.isSenha = !this.isSenha;
+  }
+
+  async presentToast(msg: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

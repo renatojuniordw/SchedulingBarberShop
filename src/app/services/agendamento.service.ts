@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument,
 import { Time } from '@angular/common';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
 
 export interface iAgendamento {
@@ -23,7 +24,7 @@ export class AgendamentoService implements OnInit {
   private oAgendamentos: Observable<iAgendamento[]>;
   private agendamentoCollection: AngularFirestoreCollection<iAgendamento>;
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private user: AuthService) {
     this.conexaoFirebase();
   }
 
@@ -33,7 +34,8 @@ export class AgendamentoService implements OnInit {
 
 
   conexaoFirebase() {
-    this.agendamentoCollection = this.db.collection<iAgendamento>('agendamentos');
+    var idUserLogado = this.user.userDetails().uid;
+    this.agendamentoCollection = this.db.collection<iAgendamento>(idUserLogado.toString());
     this.oAgendamentos = this.agendamentoCollection.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {

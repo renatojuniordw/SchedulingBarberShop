@@ -14,7 +14,8 @@ const routes: Routes = [
     children: [
       { path: 'home', loadChildren: '../home/home.module#HomePageModule' },
       { path: 'agendamento', loadChildren: '../agendamento/agendamento.module#AgendamentoPageModule' },
-      { path: 'login', loadChildren: '../login/login.module#LoginPageModule' }
+      { path: 'login', loadChildren: '../login/login.module#LoginPageModule' },
+      { path: 'configuracao', loadChildren: '../configuracao/configuracao.module#ConfiguracaoPageModule' }
     ]
   }
 ];

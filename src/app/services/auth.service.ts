@@ -1,28 +1,34 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
+import { NavController, ToastController } from '@ionic/angular';
+import { UtilsComponent } from '../components/utils/utils.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(public navCtrl: NavController) { }
 
   registerUser(value) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(value.email, value.senha)
-        .then(
-          res => resolve(res),
-          err => reject(err))
+        .then(function (res) {
+          resolve(res)
+        }, function (err) {
+          reject(err)
+        })
     })
   }
 
   loginUser(value) {
     return new Promise<any>((resolve, reject) => {
       firebase.auth().signInWithEmailAndPassword(value.email, value.senha)
-        .then(
-          res => resolve(res),
-          err => reject(err))
+        .then(function (res) {
+          resolve(res);
+        }, function (err) {
+          reject(err);
+        })
     })
   }
 
@@ -31,7 +37,7 @@ export class AuthService {
       if (firebase.auth().currentUser) {
         firebase.auth().signOut()
           .then(() => {
-            console.log("LOG Out");
+            this.navCtrl.navigateRoot('/');
             resolve();
           }).catch((error) => {
             reject();
@@ -42,6 +48,37 @@ export class AuthService {
 
   userDetails() {
     return firebase.auth().currentUser;
+  }
+
+  atualizarDadosUsuario(nome: string) {
+    var user = firebase.auth().currentUser;
+
+    return user.updateProfile({
+      displayName: nome
+    }).then(function () {
+      // Update successful.
+    }).catch(function (error) {
+      // An error happened.
+    });
+  }
+
+  sendPasswordResetEmail(emailAddress: string, callback) {
+    return firebase.auth().sendPasswordResetEmail(emailAddress).then(function (e) {
+      callback();
+    }).catch(function (error) {
+      console.log(error)
+      // An error happened.
+    });
+  }
+
+  updatePassword(newPassword: string) {
+    var user = firebase.auth().currentUser;
+
+    user.updatePassword(newPassword).then(function () {
+      // Update successful.
+    }).catch(function (error) {
+      // An error happened.
+    });
   }
 
 }

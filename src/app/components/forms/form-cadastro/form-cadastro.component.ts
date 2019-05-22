@@ -28,13 +28,15 @@ export class FormCadastroComponent implements OnInit {
   isSenha: boolean;
 
   constructor(private formBuilder: FormBuilder,
-    private navCtrl: NavController,
     public toastController: ToastController,
     private authService: AuthService) {
     this.formCad = this.formBuilder.group({
       email: ['', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
+      ])],
+      nome: ['', Validators.compose([
+        Validators.required
       ])],
       senha: ['', Validators.compose([
         Validators.required,
@@ -53,22 +55,32 @@ export class FormCadastroComponent implements OnInit {
     toast.present();
   }
 
+  tratarErros(errorCode: string) {
+    switch (errorCode) {
+      case 'auth/weak-password':
+        this.presentToast('A senha deve ter pelo menos 6 caracteres');
+        break;
+      case 'auth/invalid-email':
+        this.presentToast('E-mail inválido.');
+        break;
+      case 'auth/email-already-in-use':
+        this.presentToast('O endereço de e-mail já está sendo usado por outra conta.');
+        break;
+    }
+
+  }
+
   tryRegister(value) {
     this.authService.registerUser(value)
       .then(res => {
-        console.log(res);
-        this.errorMessage = '';
-        this.successMessage = 'Your account has been created. Please log in.';
+        this.authService.atualizarDadosUsuario(value.nome);
       }, err => {
-        console.log(err);
-        this.errorMessage = err.message;
-        this.successMessage = ''
+        this.tratarErros(err.code)
       })
   }
 
   onClick() {
     this.tryRegister(this.formCad.value)
-    console.log(this.formCad.value)
   }
 
   togglePasswordFieldType() {

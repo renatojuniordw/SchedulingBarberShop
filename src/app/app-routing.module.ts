@@ -9,6 +9,8 @@ const routes: Routes = [
   // { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   // { path: 'login', loadChildren: './pages/login/login.module#LoginPageModule' },
   { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule' },
+  { path: 'recuperar-senha', loadChildren: './pages/recuperar-senha/recuperar-senha.module#RecuperarSenhaPageModule' },
+  // { path: 'configuracao', loadChildren: './pages/configuracao/configuracao.module#ConfiguracaoPageModule' },
   // { path: 'modal', loadChildren: './pages/modal/modal.module#ModalPageModule' }
 ];
 @NgModule({

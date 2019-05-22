@@ -11,11 +11,11 @@
     <ion-card-content>
       <ion-chip>
         <ion-icon name="calendar" color="primary"></ion-icon>
-        <ion-label>{{item.data}}</ion-label>
+        <ion-label>{{item.data | date: 'dd/MM/yyyy'}}</ion-label>
       </ion-chip>
       <ion-chip>
         <ion-icon name="time" color="primary"></ion-icon>
-        <ion-label>{{item.horario}}</ion-label>
+        <ion-label>{{item.hora | date: 'H:mm'}}</ion-label>
       </ion-chip>
       <br>
       <ion-chip>
@@ -24,7 +24,8 @@
         <ion-icon name="cut"></ion-icon>
       </ion-chip>
       <br>
-      <ion-button type="button" (click)="presentActionSheet(item.id)" id="{{item.id}}" color="primary">
+      <ion-button type="button" (click)="presentActionSheet(item.id)"
+        id="{{item.id}}" color="primary">
         configuração
       </ion-button>
     </ion-card-content>

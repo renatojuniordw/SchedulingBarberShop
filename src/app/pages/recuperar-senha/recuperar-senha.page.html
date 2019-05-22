@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Recuperar senha</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content has-header="true" padding="true">
+  <div layout="row" layout-align="space-around center">
+    <form (ngSubmit)="onClick()" [formGroup]="formEmail">
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">E-mail</ion-label>
+          <ion-input type="email" required formControlName="email"></ion-input>
+        </ion-item>
+        <div class="validation-errors">
+          <ng-container *ngFor="let validation of validation_messages.email">
+            <div class="error-message"
+              *ngIf="formEmail.get('email').hasError(validation.type) &&
+              (formEmail.get('email').dirty ||
+              formEmail.get('email').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+
+        <br>
+        <ion-row>
+          <ion-button color="primary" class="button button-full" type="Submit"
+            [disabled]="!formEmail.valid"
+            block>
+            Recuperar
+          </ion-button>
+          <label class="error-message">{{errorMessage}}</label>
+          <label class="success-message">{{successMessage}}</label>
+        </ion-row>
+
+      </ion-list>
+
+    </form>
+  </div>
+</ion-content>
