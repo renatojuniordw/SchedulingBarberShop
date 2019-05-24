@@ -9,7 +9,28 @@ export class ConfiguracaoPage implements OnInit {
 
   constructor() { }
 
+  pages = [
+    {
+      title: 'Usuário',
+      url: '/usuario',
+      icon: 'contact'
+    },
+    {
+      title: 'Conta',
+      url: '/menu/agendamento',
+      icon: 'finger-print'
+    },
+    {
+      title: 'Sobre',
+      url: '/menu/configuracao',
+      icon: 'cog'
+    }
+  ]
+
   ngOnInit() {
   }
 
+  onClickConfig(itemMenu: string) {
+    console.log("teste", itemMenu)
+  }
 }

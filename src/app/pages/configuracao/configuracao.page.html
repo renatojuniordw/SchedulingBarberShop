@@ -8,5 +8,15 @@
 </ion-header>
 
 <ion-content>
-  <p>Teste</p>
+  <div *ngFor="let p of pages">
+    <!-- <ion-menu-toggle *ngIf="p.url"> -->
+    <ion-item [routerLink]="p.url" navigateForward="root"
+      routerLinkActive="active">
+      <ion-icon [name]="p.icon" id="icon"></ion-icon>
+      <ion-label>
+        {{ p.title }}
+      </ion-label>
+    </ion-item>
+    <!-- </ion-menu-toggle> -->
+  </div>
 </ion-content>

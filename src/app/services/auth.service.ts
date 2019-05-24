@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
-import { NavController, ToastController } from '@ionic/angular';
-import { UtilsComponent } from '../components/utils/utils.component';
+import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +46,7 @@ export class AuthService {
   }
 
   userDetails() {
+    // this.menu.nomeUsuario = firebase.auth().currentUser.displayName;
     return firebase.auth().currentUser;
   }
 
@@ -56,8 +56,10 @@ export class AuthService {
     return user.updateProfile({
       displayName: nome
     }).then(function () {
+      console.log("Sucesso")
       // Update successful.
     }).catch(function (error) {
+      console.log("Erro")
       // An error happened.
     });
   }

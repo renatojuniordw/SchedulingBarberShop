@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class MenuPage implements OnInit {
 
-  private nomeUsuario = '';
+  public nomeUsuario = '';
   private emailUsuario = '';
 
   pages = [
@@ -29,7 +29,7 @@ export class MenuPage implements OnInit {
     }
   ]
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {  }
 
   ngOnInit() {
     this.nomeUsuario = this.authService.userDetails().displayName;
