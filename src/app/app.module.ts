@@ -18,6 +18,7 @@ import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/fi
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AuthService } from './services/auth.service';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 import * as firebase from 'firebase';
 firebase.initializeApp(environment.firebase);
@@ -51,7 +52,8 @@ firebase.initializeApp(environment.firebase);
       provide: FirestoreSettingsToken,
       useValue: {}
     },
-    AuthService
+    AuthService,
+    ImagePicker
   ],
   bootstrap: [AppComponent]
 })

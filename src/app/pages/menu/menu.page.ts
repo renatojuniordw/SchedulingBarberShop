@@ -21,19 +21,29 @@ export class MenuPage implements OnInit {
       title: 'Agendar',
       url: '/menu/agendamento',
       icon: 'calendar'
-    },
-    {
-      title: 'Configuração',
-      url: '/menu/configuracao',
-      icon: 'cog'
     }
+    // ,
+    // {
+    //   title: 'Configuração',
+    //   url: '/menu/configuracao',
+    //   icon: 'cog'
+    // }
   ]
 
-  constructor(private authService: AuthService) {  }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.nomeUsuario = this.authService.userDetails().displayName;
-    this.emailUsuario = this.authService.userDetails().email;
+
+    if (this.authService.userDetails().displayName !== null) {
+      this.nomeUsuario = this.authService.userDetails().displayName;
+    } else {
+      this.nomeUsuario = "";
+    }
+    if (this.authService.userDetails().email !== null) {
+      this.emailUsuario = this.authService.userDetails().email;
+    } else {
+      this.emailUsuario = "";
+    }
   }
 
   onClickExit() {
