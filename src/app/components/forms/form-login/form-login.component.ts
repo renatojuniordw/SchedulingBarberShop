@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class FormLoginComponent implements OnInit {
 
-  private formLogin: FormGroup;
+  public formLogin: FormGroup;
   errorMessage: string = '';
   isSenha: boolean;
 
@@ -26,9 +26,9 @@ export class FormLoginComponent implements OnInit {
   };
 
   constructor(public navCtrl: NavController,
-    private authService: AuthService,
+    public authService: AuthService,
     public toastController: ToastController,
-    private formBuilder: FormBuilder) {
+    public formBuilder: FormBuilder) {
     this.formLogin = this.formBuilder.group({
       email: ['', Validators.compose([
         Validators.required,

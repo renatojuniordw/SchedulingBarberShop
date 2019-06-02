@@ -9,12 +9,12 @@ import { AgendamentoService, iAgendamento } from 'src/app/services/agendamento.s
 })
 export class HomePage implements OnInit {
 
-  private totalAgentamento = 0;
-  private agendamentos: iAgendamento[];
+  public totalAgentamento = 0;
+  public agendamentos: iAgendamento[];
 
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
-  constructor(private navCtrl: NavController, private agendamentoService: AgendamentoService) {
+  constructor(public navCtrl: NavController, public agendamentoService: AgendamentoService) {
     agendamentoService.conexaoFirebase();
   }
 
@@ -37,10 +37,10 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.loadAgendamentos()
+    this.loadAgendamentos("");
   }
 
-  loadAgendamentos() {
+  loadAgendamentos(event) {
     this.agendamentoService.getAgendamentos().subscribe(
       (item) => {
         this.totalAgentamento = 0;

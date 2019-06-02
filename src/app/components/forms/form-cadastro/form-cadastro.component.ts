@@ -10,7 +10,7 @@ import { NavController, ToastController } from '@ionic/angular';
 })
 export class FormCadastroComponent implements OnInit {
 
-  private formCad: FormGroup;
+  public formCad: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
 

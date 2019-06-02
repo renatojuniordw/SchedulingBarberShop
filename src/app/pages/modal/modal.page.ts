@@ -16,15 +16,23 @@ export class ModalPage implements OnInit {
   public barbeiros = [];
   public servicos = [];
   public formAgendamento: FormGroup;
-  public itensAgendamendo = {};
 
+  // AJUSTAR ESTE MÉTODO PARA RETORNAR A DATA E HR
+  public itensAgendamendo = {
+    barbeiro: "",
+    servico: "",
+    data: "",
+    hora: ""
+  };
 
-  constructor(private navParams: NavParams,
-    private modalController: ModalController,
-    private agendamentoService: AgendamentoService,
-    private serviceServicos: ServicosService,
-    private serviceBarbeiros: BarbeirosService,
-    private formBuilder: FormBuilder,
+  public anoMin = new Date().getFullYear();
+
+  constructor(public navParams: NavParams,
+    public modalController: ModalController,
+    public agendamentoService: AgendamentoService,
+    public serviceServicos: ServicosService,
+    public serviceBarbeiros: BarbeirosService,
+    public formBuilder: FormBuilder,
     public alertController: AlertController) {
 
     this.formAgendamento = this.formBuilder.group({
@@ -45,7 +53,11 @@ export class ModalPage implements OnInit {
   getDadosAgendamento() {
     this.agendamentoService.getAgendamentoPorId(this.value).subscribe(
       (item) => {
-        this.itensAgendamendo = item;
+        // AJUSTAR ESTE MÉTODO PARA RETORNAR A DATA E HR
+        this.itensAgendamendo.barbeiro = item.barbeiro
+        // this.itensAgendamendo.hora = item.horario;
+        // this.itensAgendamendo.data = item.data;
+        this.itensAgendamendo.servico = item.servico;
       });
   }
 

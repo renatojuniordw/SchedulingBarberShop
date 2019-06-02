@@ -21,6 +21,7 @@ import { AuthService } from './services/auth.service';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 import * as firebase from 'firebase';
+import { ServiceWorkerModule } from '@angular/service-worker';
 firebase.initializeApp(environment.firebase);
 
 @NgModule({
@@ -35,7 +36,8 @@ firebase.initializeApp(environment.firebase);
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     ModalPageModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,
