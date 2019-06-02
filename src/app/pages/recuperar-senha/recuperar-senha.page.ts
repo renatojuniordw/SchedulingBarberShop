@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NavController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import { UtilsComponent } from 'src/app/components/utils/utils.component';
 
 @Component({
   selector: 'app-recuperar-senha',
@@ -11,7 +10,7 @@ import { UtilsComponent } from 'src/app/components/utils/utils.component';
 })
 export class RecuperarSenhaPage implements OnInit {
 
-  private formEmail: FormGroup;
+  public formEmail: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
 

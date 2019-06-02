@@ -11,7 +11,7 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 export class UsuarioPage implements OnInit {
 
-  private formAlterUser: FormGroup;
+  public formAlterUser: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
 

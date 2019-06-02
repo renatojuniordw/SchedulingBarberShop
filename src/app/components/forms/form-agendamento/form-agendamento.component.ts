@@ -12,10 +12,10 @@ import { AlertController, NavController } from '@ionic/angular';
 })
 export class FormAgendamentoComponent implements OnInit {
 
-  private anoMin = new Date().getFullYear();
-  private barbeiros = [];
-  private servicos = [];
-  private formAgendamento: FormGroup;
+  public anoMin = new Date().getFullYear();
+  public barbeiros = [];
+  public servicos = [];
+  public formAgendamento: FormGroup;
 
   constructor(private serviceServicos: ServicosService, private serviceBarbeiros: BarbeirosService,
     private formBuilder: FormBuilder, private serviceAgendamento: AgendamentoService,

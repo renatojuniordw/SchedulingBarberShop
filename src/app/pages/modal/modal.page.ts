@@ -13,10 +13,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class ModalPage implements OnInit {
 
   @Input() value: string;
-  private barbeiros = [];
-  private servicos = [];
-  private formAgendamento: FormGroup;
-  private itensAgendamendo = {};
+  public barbeiros = [];
+  public servicos = [];
+  public formAgendamento: FormGroup;
+  public itensAgendamendo = {};
 
 
   constructor(private navParams: NavParams,
