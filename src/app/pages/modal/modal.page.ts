@@ -54,9 +54,10 @@ export class ModalPage implements OnInit {
     this.agendamentoService.getAgendamentoPorId(this.value).subscribe(
       (item) => {
         // AJUSTAR ESTE MÉTODO PARA RETORNAR A DATA E HR
+        var hora = item.horario;
         this.itensAgendamendo.barbeiro = item.barbeiro
-        // this.itensAgendamendo.hora = item.horario;
-        // this.itensAgendamendo.data = item.data;
+        this.itensAgendamendo.hora = item.horario + "";
+        this.itensAgendamendo.data = item.data + "";
         this.itensAgendamendo.servico = item.servico;
       });
   }

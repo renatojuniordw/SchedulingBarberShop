@@ -15,7 +15,6 @@ export class LoginPage implements OnInit {
   }
 
   pushPageCad() {
-    // this.navCtrl.navigateRoot('/cadastrar');
     this.navCtrl.navigateForward('/cadastrar');
   }
 
